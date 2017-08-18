@@ -21,6 +21,7 @@
               <el-col :span="5" v-for="item in itemlist"><div class="grid-content bg-purple">
                 <img slot="icon" :src="require(`../assets/${item.icon}`)"><div>{{item.name}}</div>
               </div></el-col>
+
               <el-col :span="5"><div class="grid-content bg-purple">
                 <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
               </div></el-col>
@@ -42,8 +43,8 @@
           </mt-swipe-item>
           <mt-swipe-item>
             <ul>
-              <li  v-for="item in itemlist">
-                <img slot="icon" :src="item.icon"><div>{{item.name}}</div>
+              <li  v-for="item2 in itemlist2">
+                <img slot="icon" :src="item2.icon"><div>{{item2.name}}</div>
               </li>
             </ul>
           </mt-swipe-item>
@@ -52,21 +53,16 @@
 
   <!-- 头部图案 -->
       <div class="top_banner">
-        <img slot="icon" src="../assets/top-banner.png">
+        <img slot="icon" :src="img_url">
       </div>
 
   <!-- 外卖招牌菜 -->
       <div class="m_content">
         <el-row :gutter="3">
-          <el-col :span="12"><div class="grid-content bg-purple">
-            <div class="title">外卖招牌菜</div>
-            <div>大家都爱吃</div>
-            <img src="../assets/content1.png">
-          </div></el-col>
-          <el-col :span="12"><div class="grid-content bg-purple">
-            <div class="title">颜值即正义</div>
-            <div>刷脸赢手机</div>
-            <img src="../assets/content2.png">
+          <el-col :span="12" v-for="middle in middle_list"><div class="grid-content bg-purple">
+            <div class="title">{{middle.title}}</div>
+            <div>{{middle.tip}}</div>
+            <img :src="middle.m_img">
           </div></el-col>
         </el-row>
       </div>
@@ -104,7 +100,9 @@
   </div>  
 </template>  
   
-<script>  
+<script> 
+import img1 from '../assets/top-banner.png'
+
 export default {   
   data () {  
     return {  
@@ -112,9 +110,25 @@ export default {
         value:"",
         selected:"",
 
+        // 头部轮播
         itemlist:[{
           icon:"",
           name:""
+        }],
+
+        itemlist2:[{
+          icon:"",
+          name:""
+        }],
+
+        // 头部图案
+        img_url: img1,
+
+        // 外卖招牌菜
+        middle_list:[{
+          title:"",
+          tip:"",
+          m_img:""
         }]
     }  
   },  
@@ -127,10 +141,24 @@ export default {
   methods: {  
     //获取数据
     getData(){
+      //获取头部轮播数据
       this.$http.get('../../static/dataJson/itemlist.json').then(function(response){ 
         this.itemlist = response.data.itemData;
       },function(response){
-        alert('请求失败了')
+        alert('itemlist.json请求失败了')
+      })
+
+      this.$http.get('../../static/dataJson/itemlist2.json').then(function(response){ 
+        this.itemlist2 = response.data.itemData2;
+      },function(response){
+        alert('itemlist2.json请求失败了')
+      })
+
+      //获取外卖招牌菜数据
+      this.$http.get('../../static/dataJson/i_middlelist.json').then(function(response){ 
+        this.middle_list = response.data.middleData;
+      },function(response){
+        alert('middle-list.json请求失败了')
       })
     },
   }  
