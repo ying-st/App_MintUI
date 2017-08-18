@@ -56,7 +56,7 @@
         <img slot="icon" :src="img_url">
       </div>
 
-  <!-- 外卖招牌菜 -->
+  <!-- 精选热门电影 -->
       <div class="m_content">
         <el-row :gutter="3">
           <el-col :span="12" v-for="middle in middle_list"><div class="grid-content bg-purple">
@@ -71,12 +71,30 @@
       <div class="like">
         <div class="like_title">猜你喜欢</div>
         <ul>
-          <li></li>
+          <li v-for="likes in likelist">
+            <el-row :gutter="12">
+              <el-col :span="7"><div class="grid-content bg-purple">
+                <img :src="likes.l_img">
+              </div></el-col>
+              <el-col :span="17"><div class="grid-content bg-purple">
+                <div class="shopname">{{likes.shopname}}</div>
+                <div class="shop_name_sub">{{likes.shop_name_sub}}</div>
+                
+                <div class="item_price">
+                  <div class="price_related"> 
+                    <ins class="price_current">¥{{likes.price_current}}</ins>
+                    <ins class="price_old">{{likes.price_old}}</ins>                        
+                  </div>
+                  <div class="sale_desc">已售{{likes.sale_desc}}</div>
+                </div>
+              </div></el-col>
+            </el-row>
+          </li>
         </ul>
       </div>
 
   <!-- 底部导航  -->
-        <mt-tabbar v-model="selected">
+        <mt-tabbar fixed v-model="selected">
           <mt-tab-item id="tab1">
             <i slot="icon" class="fa fa-envira" aria-hidden="true"></i>
             首页
@@ -124,12 +142,23 @@ export default {
         // 头部图案
         img_url: img1,
 
-        // 外卖招牌菜
+        // 精选热门电影
         middle_list:[{
           title:"",
           tip:"",
           m_img:""
+        }],
+
+        // 猜你喜欢
+        likelist:[{
+          l_img: "",
+          shopname: "",
+          shop_name_sub: "",
+          price_current: "",
+          price_old: "",
+          sale_desc: ""
         }]
+
     }  
   },  
   mounted:function(){  
@@ -154,9 +183,16 @@ export default {
         alert('itemlist2.json请求失败了')
       })
 
-      //获取外卖招牌菜数据
+      //获取精选热门电影数据
       this.$http.get('../../static/dataJson/i_middlelist.json').then(function(response){ 
         this.middle_list = response.data.middleData;
+      },function(response){
+        alert('middle-list.json请求失败了')
+      })
+
+      //获取猜你喜欢数据
+      this.$http.get('../../static/dataJson/i_likelist.json').then(function(response){ 
+        this.likelist = response.data.likeData;
       },function(response){
         alert('middle-list.json请求失败了')
       })
@@ -274,7 +310,7 @@ export default {
   border-radius: 50px;
 }
 
-/*外卖招牌菜*/
+/*精选热门电影*/
 .index .m_content {
   margin-top: 10px;
   text-align: left;
@@ -311,6 +347,7 @@ export default {
   text-align: left;
   margin-top: 10px;
   background-color: white;
+  padding-bottom: 60px;
 }
 
 .index .like .like_title{
@@ -327,10 +364,74 @@ export default {
 
 .index .like ul li{
   margin-left: 15px;
-  padding: 11px 10px 11px 0;
+  padding: 11px 0px 11px 0;
   box-sizing: border-box;
   display: -webkit-box;
+  height: 112px;
+  margin-right: 0;
+}
+
+.index .like .el-row{
+  width: 100%;
+}
+
+.index .like .grid-content {
+  border-radius: 4px;
+  min-height: 90px;
+}
+
+.index .like .bg-purple img{
   height: 90px;
+  width: 90px;
+}
+
+.index .like .grid-content .shopname{
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+}
+
+.index .like .grid-content .shop_name_sub{
+  overflow: hidden;
+  font-size: 13px;
+  color: #777;
+  padding-top: 9px;
+  padding-bottom: 13px;
+}
+
+.index .like .grid-content .item_price{
+  display: -webkit-box;
+  /*justify 额外的空间平均分配给每个子元素  水平等分父容器宽度*/
+  -webkit-box-pack: justify;
+  height: 22px; 
+  line-height: 22px;
+  padding-right: 4px;
+}
+
+.index .like .item_price .price_current{
+  color: #f63;
+  font-size: 21px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.index .like .item_price .price_old{
+  font-size: 13px;
+  color: #777;
+  text-decoration: line-through;
+  vertical-align: 1px;
+}
+
+.index .like .item_price .sale_desc{
+  overflow: hidden;
+  /*ellipsis  显示省略符号来代表被修剪的文本。*/
+  text-overflow: ellipsis; 
+  /*nowrap  文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+  white-space: nowrap;
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+  line-height: 24px;
 }
 
 /*底部导航*/
