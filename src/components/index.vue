@@ -8,7 +8,6 @@
             	<img src="../assets/down_slide.png" width="20"> 
             </mt-button> 
           </router-link>  
-          <!-- <mt-button icon="more" @click=""></mt-button> -->
           <i class="fa fa-plus-circle fa-2x" slot="right" aria-hidden="true"></i>  
         </mt-header>  
         <mt-search v-model="value" placeholder="输入商品名、地名或菜品"></mt-search>
@@ -18,9 +17,9 @@
         <mt-swipe :auto="0">
           <mt-swipe-item>
           <!-- element的Layout 布局 -->
-            <el-row :gutter="1">
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon1.png"><div>美食</div>
+<!--             <el-row :gutter="1">
+              <el-col :span="5" v-for="item in itemlist"><div class="grid-content bg-purple">
+                <img slot="icon" :src="require(`../assets/${item.icon}`)"><div>{{item.name}}</div>
               </div></el-col>
               <el-col :span="5"><div class="grid-content bg-purple">
                 <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
@@ -34,62 +33,19 @@
               <el-col :span="5"><div class="grid-content bg-purple">
                 <img slot="icon" src="../assets/icon5.png"><div>外卖</div>
               </div></el-col>
-            </el-row>
-
-            <el-row :gutter="1">
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon1.png"><div>美食</div></div>
-              </el-col>
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
-              </div></el-col>
-              <el-col :span="4"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon3.png"><div>酒店</div>
-              </div></el-col>
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon4.png"><div>休闲娱乐</div>
-              </div></el-col>
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon5.png"><div>外卖</div>
-              </div></el-col>
-            </el-row>
+            </el-row> -->
+            <ul>
+              <li  v-for="item in itemlist">
+                <img slot="icon" :src="item.icon"><div>{{item.name}}</div>
+              </li>
+            </ul>
           </mt-swipe-item>
           <mt-swipe-item>
-              <el-row :gutter="1">
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon1.png"><div>美食</div></div>
-                </el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
-                </div></el-col>
-                <el-col :span="4"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon3.png"><div>酒店</div>
-                </div></el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon4.png"><div>休闲娱乐</div>
-                </div></el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon5.png"><div>外卖</div>
-                </div></el-col>
-              </el-row>
-
-<!--               <el-row :gutter="1">
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon1.png"><div>美食</div></div>
-                </el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
-                </div></el-col>
-                <el-col :span="4"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon3.png"><div>酒店</div>
-                </div></el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon4.png"><div>休闲娱乐</div>
-                </div></el-col>
-                <el-col :span="5"><div class="grid-content bg-purple">
-                  <img slot="icon" src="../assets/icon5.png"><div>外卖</div>
-                </div></el-col>
-              </el-row> -->
+            <ul>
+              <li  v-for="item in itemlist">
+                <img slot="icon" :src="item.icon"><div>{{item.name}}</div>
+              </li>
+            </ul>
           </mt-swipe-item>
         </mt-swipe>
       </div>
@@ -113,6 +69,14 @@
             <img src="../assets/content2.png">
           </div></el-col>
         </el-row>
+      </div>
+
+  <!-- 猜你喜欢，图片懒加载 -->
+      <div class="like">
+        <div class="like_title">猜你喜欢</div>
+        <ul>
+          <li></li>
+        </ul>
       </div>
 
   <!-- 底部导航  -->
@@ -141,30 +105,38 @@
 </template>  
   
 <script>  
-export default {  
-  // name: 'app',  
+export default {   
   data () {  
     return {  
         place:"广州",
         value:"",
-        selected:""
+        selected:"",
+
+        itemlist:[{
+          icon:"",
+          name:""
+        }]
     }  
   },  
   mounted:function(){  
-      
+      var vm = this;
+
+      //获取json数据
+      vm.getData();
   },  
   methods: {  
-    // handleClose: function(){  
-    //     console.log("返回")  
-    // },  
-    // more: function(){  
-    //     console.log("更多")  
-    // }  
+    //获取数据
+    getData(){
+      this.$http.get('../../static/dataJson/itemlist.json').then(function(response){ 
+        this.itemlist = response.data.itemData;
+      },function(response){
+        alert('请求失败了')
+      })
+    },
   }  
 }  
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 /*固定头部*/
 .index .mint-header{
@@ -231,16 +203,34 @@ export default {
 }
 
 /*element的Layout 布局*/
-.index .swipe .bg-purple {
-  /*background: #d3dce6;*/
-}
-.index .swipe .grid-content {
+/*.index .swipe .grid-content {
   min-height: 74px;
   padding: 13px 0 0;
   font-size: 13px;
 }
 
 .index .swipe .grid-content img{
+  width: 44px;
+  height: 44px;
+  margin-bottom: 3px;
+}*/
+
+.index .swipe ul{
+  margin: 0;
+  min-height: 74px;
+  padding: 13px 0 0;
+  font-size: 13px;
+}
+
+.index .swipe ul li{
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  float: left;
+  padding-bottom: 15px;
+}
+
+.index .swipe ul li img{
   width: 44px;
   height: 44px;
   margin-bottom: 3px;
@@ -282,12 +272,38 @@ export default {
 }
 
 .index .m_content .bg-purple img{
-    height: 53px;
-    position: absolute;
-    top: 12px;
-    right: 5px;
+  height: 53px;
+  position: absolute;
+  top: 12px;
+  right: 5px;
 }
 
+/*猜你喜欢，图片懒加载*/
+.index .like{
+  text-align: left;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.index .like .like_title{
+  height: 30px;
+  line-height: 40px;
+  padding-left: 15px;
+  font-size: 14px;
+  color: #777;
+}
+
+.index .like ul{
+  margin: 0;
+}
+
+.index .like ul li{
+  margin-left: 15px;
+  padding: 11px 10px 11px 0;
+  box-sizing: border-box;
+  display: -webkit-box;
+  height: 90px;
+}
 
 /*底部导航*/
 .index .mint-tabbar > .mint-tab-item.is-selected{
