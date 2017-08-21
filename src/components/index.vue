@@ -208,6 +208,11 @@ export default {
 	background-color: #f63;
 }
 
+.index .mint-header .mint-header-button{
+  -webkit-box-flex: 0;
+  flex: 0;
+}
+
 .index .mint-header .mint-button label{
 	position: relative;
 }
@@ -223,10 +228,11 @@ export default {
 }
 
 .index .mint-search .mint-searchbar{
-  background-color:none;
   padding: 0 !important;
   width: 66% !important;
   margin: 0 auto;
+  position: fixed;
+  margin-left: 17%;
 }
 
 .index .mint-searchbar{
