@@ -1,8 +1,6 @@
 <template>
   <div class="location">
-      <router-link to="./index">
-        <i class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
-      </router-link>
+      <i class="fa fa-angle-left fa-2x" @click="back" aria-hidden="true"></i>
       <mt-search v-model="value" cancel-text="取消" placeholder="搜索"></mt-search>
 
       <div class="page-navbar">  
@@ -19,10 +17,10 @@
           <!-- tabcontainer -->  
           <mt-tab-container v-model="selected">  
             <mt-tab-container-item id="1">  
-              <mt-cell v-for="n in 10" :title="'内容 ' + n" />  
+              <mt-cell v-for="n in 10" :key="n" :title="'内容 ' + n" />  
             </mt-tab-container-item>  
             <mt-tab-container-item id="2">  
-              <mt-cell v-for="n in 4" :title="'测试 ' + n" />  
+              <mt-cell v-for="n in 4" :key="n" :title="'测试 ' + n" />  
             </mt-tab-container-item>    
           </mt-tab-container>  
         </div>  
@@ -45,7 +43,9 @@ export default {
       
   },  
   methods: {  
-
+    back:function(){
+      this.$router.go(-1);
+    }
   }  
 }  
 </script>

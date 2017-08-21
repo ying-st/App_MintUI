@@ -10,7 +10,9 @@
           </router-link>  
           <i class="fa fa-plus-circle fa-2x" slot="right" aria-hidden="true"></i>  
         </mt-header>  
-        <mt-search v-model="value" placeholder="输入商品名、地名或菜品"></mt-search>
+        <router-link to="./search">
+          <mt-search v-model="value" placeholder="输入商品名、地名或菜品"></mt-search>
+        </router-link>
 
   <!-- 头部轮播    -->
       <div class="swipe">
@@ -36,14 +38,14 @@
               </div></el-col>
             </el-row> -->
             <ul>
-              <li  v-for="item in itemlist">
+              <li v-for="item in itemlist" :key="item.icon">
                 <img slot="icon" :src="item.icon"><div>{{item.name}}</div>
               </li>
             </ul>
           </mt-swipe-item>
           <mt-swipe-item>
             <ul>
-              <li  v-for="item2 in itemlist2">
+              <li  v-for="item2 in itemlist2" :key="item2.icon">
                 <img slot="icon" :src="item2.icon"><div>{{item2.name}}</div>
               </li>
             </ul>
@@ -59,7 +61,7 @@
   <!-- 精选热门电影 -->
       <div class="m_content">
         <el-row :gutter="3">
-          <el-col :span="12" v-for="middle in middle_list"><div class="grid-content bg-purple">
+          <el-col :span="12" v-for="middle in middle_list" :key="middle.title"><div class="grid-content bg-purple">
             <div class="title">{{middle.title}}</div>
             <div>{{middle.tip}}</div>
             <img :src="middle.m_img">
@@ -71,7 +73,7 @@
       <div class="like">
         <div class="like_title">猜你喜欢</div>
         <ul>
-          <li v-for="likes in likelist">
+          <li v-for="likes in likelist" :key="likes.shopname">
             <el-row :gutter="12">
               <el-col :span="7"><div class="grid-content bg-purple">
                 <img :src="likes.l_img">
@@ -114,7 +116,6 @@
         </mt-tabbar>
 
 
-
   </div>  
 </template>  
   
@@ -126,7 +127,7 @@ export default {
     return {  
         place:"广州",
         value:"",
-        selected:"",
+        selected:"tab1",
 
         // 头部轮播
         itemlist:[{
@@ -167,6 +168,18 @@ export default {
       //获取json数据
       vm.getData();
   },  
+  watch: {
+    selected: function (val, oldVal) {
+        // 这里就可以通过 val 的值变更来确定,切换底部导航
+        // console.log(val)
+        if(val == "tab1"){
+          this.$router.push('./index');
+        }
+        if(val == "tab2"){
+          this.$router.push('./quality');
+        }
+    }
+  },
   methods: {  
     //获取数据
     getData(){
