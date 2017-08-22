@@ -6,10 +6,11 @@
 </template>
 
 <script>
+
 export default {   
   data () {  
     return {  
-      // selected: 'tab4'
+      selected: 'tab4'
 
     }  
   },  

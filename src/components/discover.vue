@@ -17,13 +17,14 @@
 </template>
 
 <script>
-export default {   
+
+export default {  
   data () {  
     return {  
       place:"广州",
       value:"",
       select: "1",
-      // selected: 'tab3',
+      selected: 'tab3',
 
     }  
   },  

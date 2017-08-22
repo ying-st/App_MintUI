@@ -115,19 +115,22 @@
           </mt-tab-item>
         </mt-tabbar>
  -->
+ <!-- <Tabber></Tabber> -->
 
   </div>  
 </template>  
   
 <script> 
 import img1 from '../assets/top-banner.png'
+// import Tabber from './tabber'
 
-export default {   
+export default {  
+  // components: { Tabber }, 
   data () {  
     return {  
         place:"广州",
         value:"",
-        // selected:"tab1",
+        selected:"tab1",
 
         // 头部轮播
         itemlist:[{
