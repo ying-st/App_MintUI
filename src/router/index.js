@@ -10,11 +10,10 @@ Vue.use(VueResource)
 
 export default new Router({
   routes: [
-  	// {
-  	//   path: '/',
-  	//   redirect: '/tabber',
-   //  },
-  	
+  	{
+  	  path: '/',
+  	  redirect: '/tabber',
+    },
     {
   		path: '/tabber',
   		component: Tabber,
