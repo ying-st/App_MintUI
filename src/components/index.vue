@@ -96,7 +96,7 @@
       </div>
 
   <!-- 底部导航  -->
-        <mt-tabbar fixed v-model="selected">
+        <!-- <mt-tabbar fixed v-model="selected">
           <mt-tab-item id="tab1">
             <i slot="icon" class="fa fa-envira" aria-hidden="true"></i>
             首页
@@ -114,7 +114,7 @@
             我的
           </mt-tab-item>
         </mt-tabbar>
-
+ -->
 
   </div>  
 </template>  
@@ -127,7 +127,7 @@ export default {
     return {  
         place:"广州",
         value:"",
-        selected:"tab1",
+        // selected:"tab1",
 
         // 头部轮播
         itemlist:[{
@@ -169,16 +169,22 @@ export default {
       vm.getData();
   },  
   watch: {
-    selected: function (val, oldVal) {
-        // 这里就可以通过 val 的值变更来确定,切换底部导航
-        // console.log(val)
-        if(val == "tab1"){
-          this.$router.push('./index');
-        }
-        if(val == "tab2"){
-          this.$router.push('./quality');
-        }
-    }
+    // selected: function (val, oldVal) {
+    //     // 这里就可以通过 val 的值变更来确定,切换底部导航
+    //     // console.log(val)
+    //     if(val == "tab1"){
+    //       this.$router.push('./index');
+    //     }
+    //     if(val == "tab2"){
+    //       this.$router.push('./quality');
+    //     }
+    //     if(val == "tab3"){
+    //       this.$router.push('./discover');
+    //     }
+    //     if(val == "tab4"){
+    //       this.$router.push('./mine');
+    //     }
+    // }
   },
   methods: {  
     //获取数据
@@ -454,8 +460,8 @@ export default {
 }
 
 /*底部导航*/
-.index .mint-tabbar > .mint-tab-item.is-selected{
+/*.index .mint-tabbar > .mint-tab-item.is-selected{
   color: #f63;
   background-color:transparent;
-}
+}*/
 </style>
