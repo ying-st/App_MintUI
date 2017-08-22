@@ -1,5 +1,5 @@
 <template>
-  <div class="tabber">
+  <div class="tabber"> 
 	    <!-- 底部导航切换页 -->  
 	    <mt-tab-container class="page-tabbar-container" v-model="selected">  
 	      <mt-tab-container-item id="tab1">  
@@ -35,6 +35,9 @@
 		  我的
 		</mt-tab-item>
 		</mt-tabbar>
+	<div style="margin-bottom: 60px;">  
+       <mt-cell class="page-part" title="当前选中" :value="selected" />  
+     </div>
   </div>
 </template>
 
