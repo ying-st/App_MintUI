@@ -17,34 +17,34 @@ export default new Router({
   routes: [
   	{
   	  path: '/',
-  	  redirect: '/index',
+  	  redirect: '/tabber/index',
     },
     {
   		path: '/tabber',
   		component: Tabber,
       children: [
         {
-          path: '/index', 
+          path: 'index', 
           component: Index, 
         },
         {
-          path: '/location', 
+          path: 'location', 
           component: Location, 
         },
         {
-          path: '/search', 
+          path: 'search', 
           component: Search, 
         },
         {
-          path: '/quality', 
+          path: 'quality', 
           component: Quality, 
         },
         {
-          path: '/discover', 
+          path: 'discover', 
           component: Discover, 
         },
         {
-          path: '/mine', 
+          path: 'mine', 
           component: Mine, 
         }
       ]

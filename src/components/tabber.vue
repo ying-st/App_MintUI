@@ -50,13 +50,14 @@ export default {
   // components: { Index, Quality, Discover, Mine },
   data () {  
     return {  
-    	selected:"tab1"
+    	selected: sessionStorage.getItem('tab') || 'tab1',
     }
   },
   watch: {
     selected: function (val, oldVal) {
         // 这里就可以通过 val 的值变更来确定,切换底部导航
         // console.log(val)
+        sessionStorage.setItem('tab',val)
         if(val == "tab1"){
           this.$router.push('./index');
         }
