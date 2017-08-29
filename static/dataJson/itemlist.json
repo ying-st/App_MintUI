@@ -1,43 +1,43 @@
 {
   "itemData":[
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126194705meishi.png",
+    	"icon":"icon1.png",
         "name":"美食"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20170223152109dp_wx_maoyan_icon.png",
+    	"icon":"icon2.png",
         "name":"电影/演出"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126203337jiudian.png",
+    	"icon":"icon3.png",
         "name":"酒店"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126202841xiuxianyule.png",
+    	"icon":"icon4.png",
         "name":"休闲娱乐"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126203251waimai.png",
+    	"icon":"icon5.png",
         "name":"外卖"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160204172927huoguo.png",
+    	"icon":"icon6.png",
         "name":"火锅"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126202946liren.png",
+    	"icon":"icon7.png",
         "name":"丽人"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126203440zhoubianyou.png",
+    	"icon":"icon8.png",
         "name":"周边游"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126203542ktv.png",
+    	"icon":"icon9.png",
         "name":"KTV"
     },
     {
-    	"icon":"//www.dpfile.com/sc/eleconfig/20160126203830jiehun.png",
+    	"icon":"icon10.png",
         "name":"婚纱摄影"
     }
    ]

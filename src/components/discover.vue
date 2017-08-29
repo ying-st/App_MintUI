@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { api } from '@/global/api'
 
 export default {  
   data () {  
@@ -100,7 +101,7 @@ export default {
       place:"广州",
       value:"",
       select: "1",
-      selected: 'tab3',
+      // selected: 'tab3',
 
       excl_Form:[{
         L_Img:"",
@@ -127,8 +128,8 @@ export default {
   methods: {  
     //获取数据
     getData(){
-      //获取头部轮播数据
-      this.$http.get('../../static/dataJson/q_exclusivelist.json').then(function(response){ 
+      //获取精选数据
+      this.$http.get(api.q_exclusivelist).then(function(response){ 
         this.excl_Form = response.data.exclusiveData;
       },function(response){
         alert('q_exclusivelist.json请求失败了')

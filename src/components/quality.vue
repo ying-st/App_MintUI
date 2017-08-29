@@ -112,13 +112,15 @@
 </template>
 
 <script>
+import { api } from '@/global/api'
+
 export default {  
   data () {  
     return {  
       place:"广州",
       value:"",
       select: "1",
-      selected: 'tab2',
+      // selected: 'tab2',
 
       exclusiveForm:[{
         L_Img:"",
@@ -146,8 +148,8 @@ export default {
   methods: {  
     //获取数据
     getData(){
-      //获取头部轮播数据
-      this.$http.get('../../static/dataJson/q_exclusivelist.json').then(function(response){ 
+      //获取专属优惠数据
+      this.$http.get(api.q_exclusivelist).then(function(response){ 
         this.exclusiveForm = response.data.exclusiveData;
       },function(response){
         alert('q_exclusivelist.json请求失败了')

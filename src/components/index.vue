@@ -18,32 +18,15 @@
       <div class="swipe">
         <mt-swipe :auto="0">
           <mt-swipe-item>
-          <!-- element的Layout 布局 -->
-<!--             <el-row :gutter="1">
-              <el-col :span="5" v-for="item in itemlist"><div class="grid-content bg-purple">
-                <img slot="icon" :src="require(`../assets/${item.icon}`)"><div>{{item.name}}</div>
-              </div></el-col>
-
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon2.png"><div>电影/演出</div>
-              </div></el-col>
-              <el-col :span="4"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon3.png"><div>酒店</div>
-              </div></el-col>
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon4.png"><div>休闲娱乐</div>
-              </div></el-col>
-              <el-col :span="5"><div class="grid-content bg-purple">
-                <img slot="icon" src="../assets/icon5.png"><div>外卖</div>
-              </div></el-col>
-            </el-row> -->
+          <!-- 读取本地图片 -->
             <ul>
               <li v-for="item in itemlist" :key="item.icon">
-                <img slot="icon" :src="item.icon"><div>{{item.name}}</div>
+                <img slot="icon" :src="require(`../assets/${item.icon}`)"><div>{{item.name}}</div>
               </li>
             </ul>
           </mt-swipe-item>
           <mt-swipe-item>
+          <!-- 读取在线图片 -->
             <ul>
               <li  v-for="item2 in itemlist2" :key="item2.icon">
                 <img slot="icon" :src="item2.icon"><div>{{item2.name}}</div>
@@ -60,6 +43,7 @@
 
   <!-- 精选热门电影 -->
       <div class="m_content">
+      <!-- element的Layout 布局 -->
         <el-row :gutter="3">
           <el-col :span="12" v-for="middle in middle_list" :key="middle.title"><div class="grid-content bg-purple">
             <div class="title">{{middle.title}}</div>
@@ -95,34 +79,12 @@
         </ul>
       </div>
 
-  <!-- 底部导航  -->
-        <!-- <mt-tabbar fixed v-model="selected">
-          <mt-tab-item id="tab1">
-            <i slot="icon" class="fa fa-envira" aria-hidden="true"></i>
-            首页
-          </mt-tab-item>
-          <mt-tab-item id="tab2">
-            <i slot="icon" class="fa fa-diamond" aria-hidden="true"></i>
-            品质优惠
-          </mt-tab-item>
-          <mt-tab-item id="tab3">
-            <i slot="icon" class="fa fa-history" aria-hidden="true"></i>
-            发现
-          </mt-tab-item>
-          <mt-tab-item id="tab4">
-            <i slot="icon" class="fa fa-user-circle-o" aria-hidden="true"></i>
-            我的
-          </mt-tab-item>
-        </mt-tabbar>
- -->
- <!-- <Tabber></Tabber> -->
-
   </div>  
 </template>  
   
 <script> 
 import img1 from '../assets/top-banner.png'
-// import Tabber from './tabber'
+import { api } from '@/global/api'
 
 export default {  
   // components: { Tabber }, 
@@ -130,13 +92,10 @@ export default {
     return {  
         place:"广州",
         value:"",
-        selected:"tab1",
+        // selected:"tab1",
 
         // 头部轮播
-        itemlist:[{
-          icon:"",
-          name:""
-        }],
+        itemlist:[],
 
         itemlist2:[{
           icon:"",
@@ -193,27 +152,27 @@ export default {
     //获取数据
     getData(){
       //获取头部轮播数据
-      this.$http.get('../../static/dataJson/itemlist.json').then(function(response){ 
+      this.$http.get(api.itemlist).then(function(response){ 
         this.itemlist = response.data.itemData;
       },function(response){
         alert('itemlist.json请求失败了')
       })
 
-      this.$http.get('../../static/dataJson/itemlist2.json').then(function(response){ 
+      this.$http.get(api.itemlist2).then(function(response){ 
         this.itemlist2 = response.data.itemData2;
       },function(response){
         alert('itemlist2.json请求失败了')
       })
 
       //获取精选热门电影数据
-      this.$http.get('../../static/dataJson/i_middlelist.json').then(function(response){ 
+      this.$http.get(api.i_middlelist).then(function(response){ 
         this.middle_list = response.data.middleData;
       },function(response){
         alert('middle-list.json请求失败了')
       })
 
       //获取猜你喜欢数据
-      this.$http.get('../../static/dataJson/i_likelist.json').then(function(response){ 
+      this.$http.get(api.i_likelist).then(function(response){ 
         this.likelist = response.data.likeData;
       },function(response){
         alert('middle-list.json请求失败了')
